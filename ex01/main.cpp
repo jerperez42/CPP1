@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:34:09 by jerperez          #+#    #+#             */
-/*   Updated: 2024/02/07 17:44:58 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:15:12 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	main(int ac, char **av)
 
 	if (3 != ac)
 	{
-		std::cout << "debug: please enter [N] [name]" << std::endl;
+		std::cout << "main: error: please enter [N] [name]" << std::endl;
 		return (1);
 	}
 	N = std::atoi(av[1]);
-	if (N < 0)
+	if (1 > N)
 	{
-		std::cout << "debug: N must be > 0" << std::endl;
+		std::cout << "main: error: N must be > 0" << std::endl;
 		return (1);
 	}
 	name = av[2];
