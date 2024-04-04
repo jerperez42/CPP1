@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:22:34 by jerperez          #+#    #+#             */
-/*   Updated: 2024/02/09 13:32:42 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:50:30 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <cstring>
 #include <sstream>
 
-int	ft_write(std::string text, const char *filename)
+int	_write(std::string text, const char *filename)
 {
 	std::ofstream		fout;
 
 	fout.open(filename);
 	if (!fout.is_open())
 	{
-		std::cerr << "Error: " << std::strerror(errno) << std::endl;
+		std::cerr << "sed: _write: " << std::strerror(errno) << std::endl;
 		return (1);
 	}
 	fout << text;
@@ -31,7 +31,7 @@ int	ft_write(std::string text, const char *filename)
 	return (0);
 }
 
-void	ft_replace(std::string *text, std::string s1, std::string s2)
+void	_replace(std::string *text, std::string s1, std::string s2)
 {
 	size_t		pos;
 	int			s1len;
@@ -55,7 +55,7 @@ void	ft_replace(std::string *text, std::string s1, std::string s2)
 	text->swap(str);
 }
 
-int	ft_read(char *filename, std::string *text)
+static int	_read(char *filename, std::string *text)
 {
 	std::ifstream		fin;
 	std::ostringstream	oss;
@@ -63,7 +63,7 @@ int	ft_read(char *filename, std::string *text)
 	fin.open(filename);
 	if (!fin.is_open())
 	{
-		std::cerr << "Error: " << std::strerror(errno) << std::endl;
+		std::cerr << "sed: _read: " << std::strerror(errno) << std::endl;
 		return (1);
 	}
 	oss << fin.rdbuf();
@@ -79,19 +79,20 @@ int	main(int ac, char **av)
 
 	if (4 != ac)
 	{
-		std::cerr << "Error: incorrect number of arguments" << std::endl;
+		std::cerr << "sed: main: error: expected [filein] [text_to_replace] [new_text]" << std::endl;
 		return (1);
 	}
 	if (!*av[2])
 	{
-		std::cerr << "Error: empty string to replace" << std::endl;
+		std::cerr << "sed: string to replace cannot be \"\"" << std::endl;
 		return (1);
 	}
-	if (ft_read(av[1], &text))
+	if (_read(av[1], &text))
 		return (1);
-	ft_replace(&text, av[2], av[3]);
+	_replace(&text, av[2], av[3]);
 	filename = std::string(av[1]).append(".replace");
-	if (ft_write(text, filename.c_str()))
+	if (_write(text, filename.c_str()))
 		return (1);
+	std::cerr << "sed: file saved: " << filename << std::endl;
 	return (0);
 }
