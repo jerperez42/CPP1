@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:34:09 by jerperez          #+#    #+#             */
-/*   Updated: 2024/02/07 16:21:21 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:08:07 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 {
 	if (1 == ac)
 	{
-		std::cout << "debug: please enter a few names" << std::endl;
+		std::cout << "main: warning: expected zombie names" << std::endl;
 		return (1);
 	}
 	std::cout << std::endl << "randomChump (stack allocation):" << std::endl << std::endl;
