@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:34:33 by jerperez          #+#    #+#             */
-/*   Updated: 2024/02/09 15:59:42 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:57:29 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 # include "Harl.h"
 # include <iostream>
 
-void	ft_main_harl_unknown(void)
+static void	_harl_unknown(void)
 {
 	std::cerr	<< "[ Probably complaining about insignificant problems ]"
 				<< std::endl;
 }
 
-int	main_leveltoi(std::string level)
+static int	_leveltoi(std::string level)
 {
 	const std::string	name[LVL_NUM] = {LVL_DEBUG, LVL_INFO, LVL_WARNING, LVL_ERROR};
 	int					i;
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	Harl				harl;
 	int					level;
 
-	level = (2 == ac) ? main_leveltoi(av[1]) : LVL_NUM;
+	level = (2 == ac) ? _leveltoi(av[1]) : LVL_NUM;
 	switch (level)
 	{
 		case (0):
@@ -50,6 +50,6 @@ int	main(int ac, char **av)
 			harl.complain(LVL_ERROR);
 			break;
 		case (LVL_NUM):
-			ft_main_harl_unknown();
+			_harl_unknown();
 	}
 }
